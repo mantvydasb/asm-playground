@@ -1,2 +1,2 @@
 #!/bin/sh
-echo pienukas
+git add . && git commit && git push origin master
