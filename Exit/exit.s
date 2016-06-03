@@ -9,7 +9,6 @@ _start:
     movl coinsList(,%edi,4), %eax
     movl %eax, %ebx
 
-
 loopStartas:
     mov $1, %eax
     jmp loopStartas2
