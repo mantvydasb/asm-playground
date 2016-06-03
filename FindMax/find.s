@@ -23,8 +23,3 @@ loopStart:
 loopEnd:
     mov $1, %eax
     int $0x80
-
-pienas:
-    mov $1, %eax
-    mov $55, %ebx
-    jmp loopStart

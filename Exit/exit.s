@@ -5,9 +5,12 @@
 
 .globl _start
 _start:
-    movl $0, %edi
-    movl coinsList(,%edi,4), %eax
-    movl %eax, %ebx
+    mov $2, %edi
+    inc %edi
+    mov coinsList(,%edi,4), %eax
+    mov %eax, %ebx
+    mov $1, %eax
+    int $0x80
 
 loopStartas:
     mov $1, %eax
