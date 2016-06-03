@@ -22,3 +22,5 @@ loopStart:
 loopEnd:
     mov $1, %eax
     int $0x80
+
+pienas:
