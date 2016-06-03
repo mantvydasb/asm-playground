@@ -1,28 +1,24 @@
 .section .data
-   coinsList: .long 25,2,5,10,50,0
+   coinsList: .long 25,2,77,10,99,0
 
 .section .text
 
 .globl _start
 _start:
-    movl $0, %edi
-    movl coinsList(,%edi,4), %eax
-    movl %eax, %ebx
-
-loopStartas:
-    mov $1, %eax
-    jmp loopStartas2
-
-loopStartas2:
-    mov $54, %ebx
-    jmp loopStart
+    mov $0, %edi
+    mov coinsList(,%edi,4), %eax ; eax = coinsList[0]
+    mov %eax, %ebx
 
 loopStart:
-    cmp $0, %ebx
-    mov $1, %eax
-    mov $12, %ebx
+    cmp $0, %eax
+    je loopEnd ; if eax == 0 then loopEnd()
+    inc %edi ; edi++
+    mov coinsList(,%edi,4), %eax
+    cmp %ebx, %eax
+    jle loopStart
+    mov %eax, %ebx
+    jmp loopStart
 
 loopEnd:
     mov $1, %eax
-    mov $12, %ebx
     int $0x80
