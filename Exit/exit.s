@@ -9,16 +9,21 @@ _start:
     movl coinsList(,%edi,4), %eax
     movl %eax, %ebx
 
+
+loopStartas:
+    mov $1, %eax
+    jmp loopStartas2
+
+loopStartas2:
+    mov $54, %ebx
+    jmp loopStart
+
 loopStart:
     cmp $0, %ebx
-    jg loopEnd2
-
-loopEnd1:
     mov $1, %eax
-    mov $11, %ebx
-    int $0x80
+    mov $12, %ebx
 
-loopEnd2:
+loopEnd:
     mov $1, %eax
-    mov $22, %ebx
+    mov $12, %ebx
     int $0x80
