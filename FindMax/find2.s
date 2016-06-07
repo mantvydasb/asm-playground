@@ -1,6 +1,6 @@
 # * PURPOSE *
 # Find the biggest coin from the list. Program finishes after checking the item at position
-# defind in the listLength variable
+# defined in the listLength variable
 #
 # * VARIABLES *
 # %edi - index of the coin being looked at;
