@@ -1,8 +1,9 @@
-# * PURPOSE *
+# PURPOSE
+#
 # Find the biggest coin in the list. Program stops iterating through the coins list
 # when it finds a coin with value 0 at the end of the list.
 #
-# * VARIABLES *
+# VARIABLES
 # %edi - index of the coin being looked at;
 # %eax - current coin value being looked at;
 # %ebx - biggest coin value;

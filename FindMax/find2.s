@@ -1,8 +1,9 @@
-# * PURPOSE *
+# PURPOSE
+#
 # Find the biggest coin from the list. Program finishes after checking the item at position
 # defined in the listLength variable
 #
-# * VARIABLES *
+# VARIABLES
 # %edi - index of the coin being looked at;
 # %eax - current coin value being looked at;
 # coinsList - list of all coin values;

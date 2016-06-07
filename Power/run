@@ -1,2 +1,2 @@
 #!/bin/sh
-as find.s -o find.o && ld find.o -o find && ./find; echo $?
+as power.s -o power.o && ld power.o -o power && ./power; echo $?
