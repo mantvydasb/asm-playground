@@ -8,7 +8,7 @@
 # coinsList - list of all coin values;
 
 .section .data
-   coinsList: .long 25,40,77,10,99,101,0
+   coinsList: .long 25,40,77,80,10,99,101,0
    listLength: .long 3
    message: .string "Biggest coin value is: "
    maxCoinValue: .long 0
