@@ -1,0 +1,2 @@
+#!/bin/sh
+as find2.s -o find2.o && ld find2.o -o find2 && ./find2; echo $?

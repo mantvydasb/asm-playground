@@ -1,5 +1,5 @@
 .section .data
-   coinsList: .long 25,40,77,10,99,0
+   coinsList: .long 25,40,77,10,99,101,0
 
 .section .text
 
