@@ -27,7 +27,7 @@ _start:
     push $5
     call power
     add $8, %esp
-    pop %ebx
+    pop ebx
 
     add %eax, %ebx
 
@@ -36,7 +36,7 @@ _start:
 
 .type power, @function
 power:
-    push %ebp
+    push ebp
     mov %esp, %ebp
     sub $4, %esp
 
@@ -57,5 +57,5 @@ powerLoopStart:
 endPower:
     mov -4(%ebp), %eax
     mov %ebp, %esp
-    pop %ebp
+    pop ebp
     ret

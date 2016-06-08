@@ -18,6 +18,7 @@
 
 .globl _start
 _start:
+    movl %esp, %ebp
     mov $0, %edi
     mov coinsList(,%edi,4), %eax # eax = coinsList[0]
     mov %eax, maxCoinValue
