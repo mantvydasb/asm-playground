@@ -20,10 +20,10 @@
 
 .globl _start
 _start:
-    pushl $5 #power
-    pushl $2 #base
+    push $5 #power
+    push $2 #base
     call power
-    addl $8, %esp
+    add $8, %esp
     mov %eax, result
 
 #    push $2
@@ -33,38 +33,40 @@ _start:
 #    pop %ebx
 #    add %eax, %ebx
 
+    #print message
     mov $4, %eax
     mov $1, %ebx
     mov $message, %ecx
     mov $17, %edx
     int $0x80
 
-    movl $1, %eax
+    #exit with results
+    mov $1, %eax
     mov result, %ebx
     int $0x80
 
 
 .type power, @function
 power:
-    pushl %ebp
-    movl %esp, %ebp
-    subl $4, %esp
+    push %ebp
+    mov %esp, %ebp
+    sub $4, %esp
 
-    movl 8(%ebp), %ebx
-    movl 12(%ebp), %ecx
-    movl %ebx, -4(%ebp)
+    mov 8(%ebp), %ebx
+    mov 12(%ebp), %ecx
+    mov %ebx, -4(%ebp)
 
     powerLoopStart:
         cmp $1, %ecx
         je endPower
-        movl -4(%ebp), %eax
-        imull %ebx, %eax
-        movl %eax, -4(%ebp)
-        decl %ecx
+        mov -4(%ebp), %eax
+        imul %ebx, %eax
+        mov %eax, -4(%ebp)
+        dec %ecx
         jmp powerLoopStart
 
     endPower:
-        movl -4(%ebp), %eax
-        movl %ebp, %esp
-        popl %ebp
+        mov -4(%ebp), %eax
+        mov %ebp, %esp
+        pop %ebp
         ret

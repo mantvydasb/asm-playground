@@ -1,2 +1,3 @@
 #!/bin/sh
-as --32 power.s -o power.o && ld -m elf_i386 power.o -o power && ./power; echo $?
+as -g --32 power.s -o power.o && ld -m elf_i386 power.o -o power && ./power; echo $?
+# as --32 power.s -o power.o && ld -m elf_i386 power.o -o power && ./power; echo $?
