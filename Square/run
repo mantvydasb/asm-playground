@@ -1,0 +1,3 @@
+#!/bin/sh
+as -g --32 square.s -o square.o && ld -m elf_i386 square.o -o square && ./square; echo $?
+# as --32 square.s -o square.o && ld -m elf_i386 square.o -o square && ./square; echo $?
