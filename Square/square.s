@@ -9,6 +9,13 @@
 .section .text
 .globl _start
 _start:
+    #just testing some xor'ing
+    mov $4, %eax
+    xor %eax, %eax
+    mov $4, %eax
+    mov $5, %ebx
+    xor %eax, %ebx
+
     push $10
     call square
     add $4, %esp
