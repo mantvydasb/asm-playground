@@ -20,10 +20,11 @@
 
 .globl _start
 _start:
+    push $7
     push $5 #power
     push $2 #base
     call power
-    add $8, %esp
+    add $20, %esp
     mov %eax, result
 
 #    push $2
