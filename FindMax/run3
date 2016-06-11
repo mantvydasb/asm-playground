@@ -1,0 +1,3 @@
+#!/bin/sh
+# as find3.s -o find3.o && ld find3.o -o find3 && ./find3; echo $?
+as -g --32 find3.s -o find3.o && ld -m elf_i386 find3.o -o find3 && ./find3; echo $?
