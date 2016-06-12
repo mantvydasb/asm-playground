@@ -1,0 +1,3 @@
+#!/bin/sh
+as -g --32 manipulator.s -o manipulator.o && ld -m elf_i386 manipulator.o -o manipulator && ./manipulator; echo $?
+# as --32 manipulator.s -o manipulator.o && ld -m elf_i386 manipulator.o -o manipulator && ./manipulator; echo $?
