@@ -7,7 +7,8 @@
     .equ EOF,       0
     .equ ARG_COUNT, 2
     fileIn: .string "/mnt/HDD1.2/Dev/Asm/FileManipulators/low"
-    fileOut: .string "/mnt/HDD1.2/Dev/Asm/FileManipulators/upp"
+    fileOut: .string "a/mnt/HDD1.2/Dev/Asm/FileManipulators/upp"
+    errorMessage: .string "Could not open the file.."
 
     #system calls
     .equ SYS_OPEN,  5
@@ -54,6 +55,10 @@ _start:
         mov $0666, %edx
         int $SYSTEM_CALL
 
+        #check if file openede successfully
+        cmp $0, %eax
+        jl fileError
+
     store_fd_in:
         mov %eax, ST_FD_IN(%ebp)
 
@@ -64,6 +69,9 @@ _start:
         mov $O_CREATE_WRONGLY_TRUNC, %ecx
         mov $0666, %edx
         int $SYSTEM_CALL
+
+        cmp $0, %eax
+        jl fileError
 
     store_fd_out:
         mov %eax, ST_FD_OUT(%ebp)
@@ -108,6 +116,18 @@ _start:
         mov $SYS_EXIT, %eax
         mov $0, %ebx
         int $SYSTEM_CALL
+
+
+    fileError:
+        mov $SYS_WRITE, %eax
+        mov $1, %ebx
+        mov $errorMessage, %ecx
+        int $SYSTEM_CALL
+
+        mov $SYS_EXIT, %eax
+        mov $0, %ebx
+        int $SYSTEM_CALL
+
 
 .type transform_text_touppercase, @function
 transform_text_touppercase:
