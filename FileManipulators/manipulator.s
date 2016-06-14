@@ -6,6 +6,8 @@
 
     .equ EOF,       0
     .equ ARG_COUNT, 2
+    fileIn: .string "/mnt/HDD1.2/Dev/Asm/FileManipulators/low"
+    fileOut: .string "/mnt/HDD1.2/Dev/Asm/FileManipulators/upp"
 
     #system calls
     .equ SYS_OPEN,  5
@@ -44,39 +46,42 @@ _start:
     mov %esp, %ebp
     sub $ST_RESERVED_BYTES, %esp
 
-    open_files:
+    #open_files:
     open_fd_in:
         mov $SYS_OPEN, %eax
-        mov ST_ARGV_1(%ebp), %ebx
-        mov O_READ_ONLY, %ecx #does not matter for reading files, but oh well
-        mov $0666, %edx
-        int $SYSTEM_CALL
-
-    open_fd_out:
-        mov $SYS_OPEN, %eax
-        mov ST_ARGV_2(%ebp)
-        mov O_CREATE_WRONGLY_TRUNC, %ecx
+        mov $fileIn, %ebx
+        #mov ST_ARGV_1(%ebp), %ebx
+        mov $O_READ_ONLY, %ecx #does not matter for reading files, but oh well
         mov $0666, %edx
         int $SYSTEM_CALL
 
     store_fd_in:
         mov %eax, ST_FD_IN(%ebp)
 
+    open_fd_out:
+        mov $SYS_OPEN, %eax
+        mov $fileOut, %ebx
+        #mov ST_ARGV_2(%ebp), %ebx
+        mov $O_CREATE_WRONGLY_TRUNC, %ecx
+        mov $0666, %edx
+        int $SYSTEM_CALL
+
     store_fd_out:
         mov %eax, ST_FD_OUT(%ebp)
 
-    read_file_loop_begin:
+    read_loop_begin:
         #read in a block from the input file
         mov $SYS_READ, %eax
         mov ST_FD_IN(%ebp), %ebx
         mov $BUFFER_DATA, %ecx
+        mov $BUFFER_SIZE, %edx
         int $SYSTEM_CALL
 
         #exit if EOF
         cmp $EOF, %eax
-        jle read_file_loop_end
+        jle end_loop
 
-    read_file_continue:
+    continue_read_loop:
         #transform the block to uppercase
         push $BUFFER_DATA
         push %eax #bytes read from the input file
@@ -85,22 +90,22 @@ _start:
         add $4, %esp
 
         #write the transformed block to the output file
-        mov SYS_WRITE, %eax
+        mov %eax, %edx
+        mov $SYS_WRITE, %eax
         mov ST_FD_OUT(%ebp), %ebx
         mov $BUFFER_DATA, %ecx
-        mov %eax, %edx
         int $SYSTEM_CALL
 
-    read_file_loop_end:
-        mov SYS_CLOSE, %eax
+    end_loop:
+        mov $SYS_CLOSE, %eax
         mov ST_FD_OUT(%ebp), %ebx
-        int SYSTEM_CALL
+        int $SYSTEM_CALL
 
-        mov SYS_CLOSE, %eax
+        mov $SYS_CLOSE, %eax
         mov ST_FD_IN(%ebp), %ebx
         int $SYSTEM_CALL
 
-        mov SYS_EXIT, %eax
+        mov $SYS_EXIT, %eax
         mov $0, %ebx
         int $SYSTEM_CALL
 
@@ -150,3 +155,13 @@ transform_text_touppercase:
 
         add $UPPER_CONVERSION, %cl
         mov %cl, (%eax, %edi, 1)
+
+    next_byte:
+        inc %edi
+        cmp %edi, %ebx
+        jne convert_loop
+
+    convert_loop_end:
+        mov %ebp, %esp
+        pop %ebp
+        ret
