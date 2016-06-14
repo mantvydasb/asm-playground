@@ -27,7 +27,7 @@
     .equ STDERR,    2
 
 .section .bss
-    .equ BUFFER_SIZE,   500
+    .equ BUFFER_SIZE,   20
     .lcomm BUFFER_DATA, BUFFER_SIZE
 
 .section .text
@@ -46,7 +46,6 @@ _start:
     mov %esp, %ebp
     sub $ST_RESERVED_BYTES, %esp
 
-    #open_files:
     open_fd_in:
         mov $SYS_OPEN, %eax
         mov $fileIn, %ebx
@@ -95,6 +94,7 @@ _start:
         mov ST_FD_OUT(%ebp), %ebx
         mov $BUFFER_DATA, %ecx
         int $SYSTEM_CALL
+        jmp read_loop_begin
 
     end_loop:
         mov $SYS_CLOSE, %eax
