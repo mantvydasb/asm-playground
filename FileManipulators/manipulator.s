@@ -7,7 +7,7 @@
     .equ EOF,       0
     .equ ARG_COUNT, 2
     fileIn: .string "/mnt/HDD1.2/Dev/Asm/FileManipulators/low"
-    fileOut: .string "a/mnt/HDD1.2/Dev/Asm/FileManipulators/upp"
+    fileOut: .string "/mnt/HDD1.2/Dev/Asm/FileManipulators/upp"
     errorMessage: .string "Could not open the file.."
 
     #system calls
@@ -91,13 +91,13 @@ _start:
     continue_read_loop:
         #transform the block to uppercase
         push $BUFFER_DATA
-        push %eax #bytes read from the input file
+        push %eax #number of bytes read from the input file
         call transform_text_touppercase
         pop %eax
         add $4, %esp
 
         #write the transformed block to the output file
-        mov %eax, %edx
+        mov %eax, %edx #edx = BUFFER_SIZE
         mov $SYS_WRITE, %eax
         mov ST_FD_OUT(%ebp), %ebx
         mov $BUFFER_DATA, %ecx
