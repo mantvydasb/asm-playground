@@ -1,0 +1,3 @@
+#!/bin/sh
+as -g --32 SimpleMemoryManager.s -o SimpleMemoryManager.o && ld -m elf_i386 SimpleMemoryManager.o -o SimpleMemoryManager && ./SimpleMemoryManager; echo $?
+# as --32 SimpleMemoryManager.s -o SimpleMemoryManager.o && ld -m elf_i386 SimpleMemoryManager.o -o SimpleMemoryManager && ./SimpleMemoryManager; echo $?
