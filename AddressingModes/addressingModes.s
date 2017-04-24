@@ -59,6 +59,9 @@ _start:
 
 	; put the 0x00600150 as a value in the eax; This will start pointing to "o World World30Pienas" 
 	mov ebx, 0x00600150
+	
+	; put 4 bytes found at address 0x00600150, which happen to be 72 6c 64 0a - "rld " (next to the Hello World30Pienas)
+	mov ebx, [0x00600150]
 
 	mov	ebx, 0		
 	mov	eax, 1		
