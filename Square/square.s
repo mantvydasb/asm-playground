@@ -16,7 +16,8 @@ _start:
     mov $5, %ebx
     xor %eax, %ebx
 
-    push $10
+    push $5
+    push $8
     call square
     add $4, %esp
 
@@ -32,6 +33,9 @@ square:
 
     mov 8(%ebp), %eax
     imul %eax, %eax
+
+	push $2
+	push $3
 
     mov %ebp, %esp
     pop %ebp

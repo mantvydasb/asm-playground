@@ -9,7 +9,7 @@
 # VARIABLES
 # ebx - base
 # ecx - power
-#-4(%ebp) - current result
+# -4(%ebp) - current result
 
 .section .data
     message: .string "2 power of 5 is: "
@@ -20,24 +20,17 @@
 
 .globl _start
 _start:
-    push $7
     push $5 #power
     push $2 #base
     call power
     add $20, %esp
     mov %eax, result
 
-#    push $2
-#    push $5
-#    call power
-#    add $8, %esp
-#    pop %ebx
-#    add %eax, %ebx
-
     #print message
     mov $4, %eax
     mov $1, %ebx
     mov $message, %ecx
+
     mov $17, %edx
     int $0x80
 
