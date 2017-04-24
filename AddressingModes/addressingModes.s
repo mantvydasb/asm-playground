@@ -48,7 +48,7 @@ _start:
 	; puts 0x0b0a0501 into eax aka put 4 bytes from the address where var3 starts;
 	mov	eax, [var3]
 
-	; puts 0x0b0a05 into eax aka put 4 bytes from the address where var3 starts;
+	; puts 0x0b0a05 (note the missing 01 byte at the end) into eax aka put 4 bytes from the address where var3 starts;
 	mov	eax, [var3 + 1]
 
 	; puts var3 memory location address into eax. Same as mov eax, var3;
