@@ -73,6 +73,9 @@ _start:
 	
 	; puts ASCII EEEE 16 bytes (next-line in the data-dump) further from 0x00600150
 	mov dword [0x00600150 + 16], 0x41414141
+	
+	; puts VMXh string in that position;
+	mov dword [0x00600150], "VMXh"
 
 	mov	ebx, 0		
 	mov	eax, 1		
