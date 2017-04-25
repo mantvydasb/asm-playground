@@ -57,14 +57,22 @@ _start:
 	; puts var3 memory location (+1 offset byte) address into eax. Same as mov eax, var3;
 	lea	eax, [var3 + 1]
 
-	; put the 0x00600150 as a value in the eax; This will start pointing to "o World World30Pienas" 
+	; puts the 0x00600150 as a value in the eax; This will start pointing to "o World World30Pienas" 
 	mov ebx, 0x00600150
 	
-	; put 4 bytes found at address 0x00600150, which happen to be 72 6c 64 0a - "rld " (next to the Hello World30Pienas)
+	; puts 4 bytes found at address 0x00600150, which happen to be 72 6c 64 0a - "rld " (next to the Hello World30Pienas)
 	mov ebx, [0x00600150]
 	
 	push 0x444442
+
 	mov rcx, [rsp + 32]
+
+	; puts a value into eax that seems to be a valid memory location then write DDDD into that address;
+	mov eax, 0x00600150
+	mov dword [eax], 0x44444444
+	
+	; puts ASCII EEEE 16 bytes (next-line in the data-dump) further from 0x00600150
+	mov dword [0x00600150 + 16], 0x41414141
 
 	mov	ebx, 0		
 	mov	eax, 1		
