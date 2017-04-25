@@ -1,5 +1,4 @@
 #!/bin/sh
 name=addressingModes
 nasm $name.s -o $name.obj -f elf64 -g && ld $name.obj -o $name-exec && ./$name-exec;
-echo $name.s
 cp $name.s ~/
