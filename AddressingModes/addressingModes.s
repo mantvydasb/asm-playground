@@ -81,7 +81,7 @@ _start:
 	; puts value found at rcx + 16 offset bytes into rbx;
 	lea rbx, [rcx + 16]
 	
-	; these are the same;
+	; these are the same and will both point to the strings VMXh start;
 	lea edx, [0x00600150]
 	mov ecx, 0x00600150
 		
