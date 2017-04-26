@@ -78,7 +78,7 @@ _start:
 	; puts VMXh string in that position;
 	mov dword [0x00600150], "VMXh"
 	
-	; these are the same and will both point to the strings VMXh start;
+	; these are the same and will both point to the start of string VMXh;
 	lea edx, [0x00600150]
 	mov ecx, 0x00600150
 
