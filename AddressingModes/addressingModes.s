@@ -6,7 +6,7 @@ var2:	db "World30pienas", 6
 len2:	equ $-var2
 
 var3: db 1,5,0xA,0xB,0xC
-var4: db 1,2,3,4,5,6
+var4: db 5,5,5,5
 
 SECTION .text		
 global _start		
@@ -78,10 +78,8 @@ _start:
 	; puts VMXh string in that position;
 	mov dword [0x00600150], "VMXh"
 
-	; puts value of var4 variable +16 offset bytes, which happens to be a memory-like address into eax;
-	mov ecx, var4 + 16
-	; and then ebx gets assigned an effective memory address of the ecx + 16 offset bytes;
-	lea ebx, [ecx + 16]
+	; puts value found at rcx + 16 offset bytes into rbx;
+	lea rbx, [rcx + 16]
 
 	mov	ebx, 0		
 	mov	eax, 1		
