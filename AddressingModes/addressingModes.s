@@ -77,14 +77,13 @@ _start:
 	
 	; puts VMXh string in that position;
 	mov dword [0x00600150], "VMXh"
-
-	; puts value found at rcx + 16 offset bytes into rbx;
-	lea rbx, [rcx + 16]
 	
 	; these are the same and will both point to the strings VMXh start;
 	lea edx, [0x00600150]
 	mov ecx, 0x00600150
-		
+
+	; puts value found at rcx + 16 offset bytes into rbx;
+	lea rbx, [rcx + 16]
 
 	mov	ebx, 0		
 	mov	eax, 1		
