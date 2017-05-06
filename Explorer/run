@@ -1,0 +1,4 @@
+#!/bin/sh
+name=explorer
+nasm $name.s -o $name.obj -f elf64 -g && ld $name.obj -o $name-exec && ./$name-exec;
+cp $name.s ~/

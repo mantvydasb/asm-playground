@@ -84,6 +84,9 @@ _start:
 
 	; puts value found at rcx + 16 offset bytes into rbx;
 	lea rbx, [rcx + 16]
+	
+	mov eax, 0
+	test eax, eax
 
 	mov	ebx, 0		
 	mov	eax, 1		
